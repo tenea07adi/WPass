@@ -1,9 +1,14 @@
-﻿namespace ConsoleApp
+﻿using ConsoleApp.Services.DataStorage;
+
+namespace ConsoleApp
 {
     internal class Program
     {
+        protected static IDataStorageService? _dataStorageService { get; set; }
+
         static void Main(string[] args)
         {
+            InitializeApp();
             StartMenu();
         }
 
@@ -43,6 +48,11 @@
                         break;
                 }
             }
+        }
+
+        protected static void InitializeApp()
+        {
+            _dataStorageService = new DataStorageService("LocalStorage", "data.json");
         }
     }
 }
