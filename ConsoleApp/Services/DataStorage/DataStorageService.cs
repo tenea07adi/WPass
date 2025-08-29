@@ -46,7 +46,7 @@ namespace ConsoleApp.Services.DataStorage
 
         private void CreateFileIfNotExists()
         {
-            if (!Directory.Exists(Path.GetDirectoryName(_filePath)))
+            if (!Directory.Exists(_filePath))
             {
                 Directory.CreateDirectory(_filePath);
             }
