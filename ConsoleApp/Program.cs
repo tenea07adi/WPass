@@ -36,7 +36,7 @@ namespace ConsoleApp
                         break;
 
                     case "2":
-                        Console.WriteLine("This feature is not implemented yet :(");
+                        AddAccount();
                         break;
 
                     case "3":
@@ -53,6 +53,43 @@ namespace ConsoleApp
         protected static void InitializeApp()
         {
             _dataStorageService = new DataStorageService("LocalStorage", "data.json");
+        }
+
+        private static void AddAccount()
+        {
+            var data = _dataStorageService!.LoadData();
+
+            Console.WriteLine("Provide a title:");
+            string title = Console.ReadLine() ?? " ";
+
+            Console.WriteLine("Provide a link:");
+            string url = Console.ReadLine() ?? " ";
+
+            Console.WriteLine("Provide an username:");
+            string userName = Console.ReadLine() ?? " ";
+
+            Console.WriteLine("Provide a password:");
+            string password = Console.ReadLine() ?? " ";
+
+            Console.WriteLine("Provide details if necessarly:");
+            string details = Console.ReadLine() ?? " ";
+
+            DateTime createdOn = DateTime.Now;
+
+            DateTime modifiedOn = DateTime.Now;
+
+            data.Accounts.Add(new Models.Account()
+            {
+                Title = title,
+                Url = url,
+                Username = userName,
+                Password = password,
+                Details = details,
+                CreatedOn = createdOn,
+                ModifiedOn = modifiedOn
+            });
+
+            _dataStorageService.WriteData(data);
         }
     }
 }
