@@ -1,19 +1,23 @@
 ﻿using ConsoleApp.Models;
-using System.IO;
+using ConsoleApp.Services.Security;
 
 namespace ConsoleApp.Services.DataStorage
 {
     public class DataStorageService : IDataStorageService
     {
+        private readonly ICryptographyService _cryptographyService;
+
         private readonly string _filePath;
         private readonly string _fileName;
 
         public string FullFilePath => Path.Combine(_filePath, _fileName);
 
-        public DataStorageService(string filePath, string fileName)
+        public DataStorageService(string filePath, string fileName, ICryptographyService cryptographyService)
         {
             _filePath = filePath;
             _fileName = fileName;
+
+            _cryptographyService = cryptographyService;
 
             InitializeStorage();
         }
