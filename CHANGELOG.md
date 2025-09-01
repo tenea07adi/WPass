@@ -13,5 +13,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Create the menu [#2](https://github.com/tenea07adi/WPass/issues/2)
 - Create logic to read/write data [#3](https://github.com/tenea07adi/WPass/issues/3)
 - Create new account flow [#5](https://github.com/tenea07adi/WPass/issues/5)
+- Create a cryptography service [#11](https://github.com/tenea07adi/WPass/issues/11)
 
 ### Fixed
