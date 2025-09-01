@@ -1,9 +1,11 @@
 ﻿using ConsoleApp.Services.DataStorage;
+using ConsoleApp.Services.Security;
 
 namespace ConsoleApp
 {
     internal class Program
     {
+        protected static ICryptographyService? _cryptographyService { get; set; }
         protected static IDataStorageService? _dataStorageService { get; set; }
 
         static void Main(string[] args)
@@ -52,7 +54,8 @@ namespace ConsoleApp
 
         protected static void InitializeApp()
         {
-            _dataStorageService = new DataStorageService("LocalStorage", "data.json");
+            _cryptographyService = new CryptographyService();
+            _dataStorageService = new DataStorageService("LocalStorage", "data.json", _cryptographyService);
         }
 
         private static void AddAccount()
