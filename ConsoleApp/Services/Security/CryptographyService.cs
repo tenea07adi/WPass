@@ -5,30 +5,39 @@ namespace ConsoleApp.Services.Security
 {
     public class CryptographyService : ICryptographyService
     {
-        public string Decrypt(string encryptedText, string password)
+        public string GenerateIV()
         {
-            return DecryptStringFromBytes(StringToByteArray(encryptedText), GetAesKey(password), GetAesKey(password, true));
+            using (Aes aes = Aes.Create())
+            {
+                aes.GenerateIV();
+                return ByteArrayToHexString(aes.IV);
+            }
         }
 
-        public T DecryptObjectM<T>(string encryptedText, string password)
+        public string Decrypt(string encryptedText, string password, string iv)
         {
-            var decriptedText = Decrypt(encryptedText, password);
-            return System.Text.Json.JsonSerializer.Deserialize<T>(decriptedText) ??
+            return DecryptStringFromBytes(StringToByteArray(encryptedText), GetAesKey(password), GetAesKey(iv, true));
+        }
+
+        public T DecryptObjectM<T>(string encryptedText, string password, string iv)
+        {
+            var decryptedText  = Decrypt(encryptedText, password, iv);
+            return System.Text.Json.JsonSerializer.Deserialize<T>(decryptedText ) ??
                 throw new Exception("Can't decrypt!");
         }
 
-        public string Encrypt(string plainText, string password)
+        public string Encrypt(string plainText, string password, string iv)
         {
-            var byteArrayResult = EncryptStringToBytes(plainText, GetAesKey(password), GetAesKey(password, true)) ?? throw new Exception("Can't encrypt!"); 
+            var byteArrayResult = EncryptStringToBytes(plainText, GetAesKey(password), GetAesKey(iv, true)) ?? throw new Exception("Can't encrypt!"); 
         
             return ByteArrayToHexString(byteArrayResult);
         }
 
-        public string Encrypt<T>(T obj, string password)
+        public string Encrypt<T>(T obj, string password, string iv)
         {
             var text = System.Text.Json.JsonSerializer.Serialize(obj);
 
-            return Encrypt(text, password);
+            return Encrypt(text, password, iv);
         }
 
         private byte[] EncryptStringToBytes(string plainText, byte[] key, byte[] iv)
@@ -95,11 +104,11 @@ namespace ConsoleApp.Services.Security
 
             if (iv)
             {
-                return MD5.Create().ComputeHash(byteKey);
+                return SHA256.Create().ComputeHash(byteKey).Take(16).ToArray();
             }
             else
             {
-                return SHA256Managed.Create().ComputeHash(byteKey);
+                return SHA256.Create().ComputeHash(byteKey);
             }
         }
 
