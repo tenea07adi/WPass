@@ -6,7 +6,7 @@ namespace ConsoleApp.Services.DataStorage
     {
         public string FullFilePath { get; }
         public void InitializeStorage();
-        public void WriteData(PersistedData data);
-        public PersistedData LoadData();
+        public void WriteData(PersistedDataDecrypted data);
+        public PersistedDataDecrypted LoadData();
     }
 }

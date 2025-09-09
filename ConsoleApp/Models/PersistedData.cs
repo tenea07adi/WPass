@@ -3,6 +3,9 @@ namespace ConsoleApp.Models
 {
     public class PersistedData
     {
-        public List<Account> Accounts { get; set; } = new List<Account>();
+        public string EncryptedAccounts { get; set; } = string.Empty;
+        public int DataModelVersion { get; set; }
+
+        public string IV {  get; set; }= string.Empty;
     }
 }

@@ -27,11 +27,11 @@ namespace ConsoleApp.Services.DataStorage
             CreateFileIfNotExists();
         }
 
-        public PersistedData LoadData()
+        public PersistedDataDecrypted LoadData()
         {
             var fileData = File.ReadAllText(FullFilePath);
 
-            var data = System.Text.Json.JsonSerializer.Deserialize<PersistedData>(fileData);
+            var data = System.Text.Json.JsonSerializer.Deserialize<PersistedDataDecrypted>(fileData);
 
             if(data == null)
             {
@@ -41,7 +41,7 @@ namespace ConsoleApp.Services.DataStorage
             return data;
         }
 
-        public void WriteData(PersistedData data)
+        public void WriteData(PersistedDataDecrypted data)
         {
             var fileData = System.Text.Json.JsonSerializer.Serialize(data, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
 
@@ -57,7 +57,7 @@ namespace ConsoleApp.Services.DataStorage
 
             if (!File.Exists(FullFilePath))
             {
-                WriteData(new PersistedData() { Accounts = new List<Account>() });
+                WriteData(new PersistedDataDecrypted() { Accounts = new List<Account>() });
             }
         }
     }
