@@ -42,7 +42,7 @@ namespace ConsoleApp
                         break;
 
                     case "3":
-                        Console.WriteLine("This feature is not implemented yet :(");
+                        ShowAccounts();
                         break;
 
                     default:
@@ -93,6 +93,23 @@ namespace ConsoleApp
             });
 
             _dataStorageService.WriteData(data);
+        }
+
+        private static void ShowAccounts()
+        {
+            var data = _dataStorageService!.LoadData();
+
+            for(int i = 0; i < data.Accounts.Count; i++)
+            {
+                var account = data.Accounts[i];
+                Console.WriteLine("Account " + i);
+                Console.WriteLine("Title: " + account.Title);
+                Console.WriteLine("Url: " + account.Url);
+                Console.WriteLine("Username: "+ account.Username);
+                Console.WriteLine("Password: "+account.Password);
+                Console.WriteLine("Details: " +account.Details);
+                Console.WriteLine(" ");
+            }
         }
     }
 }
