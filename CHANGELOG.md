@@ -16,5 +16,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Create a cryptography service [#11](https://github.com/tenea07adi/WPass/issues/11)
 - Create display accounts flow [#6](https://github.com/tenea07adi/WPass/issues/6)
 - Update the data models [#13](https://github.com/tenea07adi/WPass/issues/13)
+- Implement repository pattern for Account entity [#20](https://github.com/tenea07adi/WPass/issues/20)
 
 ### Fixed

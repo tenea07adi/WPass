@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.Models;
+using ConsoleApp.Models.Entity;
 using ConsoleApp.Services.Security;
 
 namespace ConsoleApp.Services.DataStorage

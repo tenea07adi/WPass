@@ -1,4 +1,6 @@
 ﻿
+using ConsoleApp.Models.Entity;
+
 namespace ConsoleApp.Models
 {
     public class PersistedDataDecrypted

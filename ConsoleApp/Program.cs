@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Services.DataStorage;
+﻿using ConsoleApp.Models.Entity;
+using ConsoleApp.Services.DataStorage;
 using ConsoleApp.Services.Security;
 
 namespace ConsoleApp
@@ -81,7 +82,7 @@ namespace ConsoleApp
 
             DateTime modifiedOn = DateTime.Now;
 
-            data.Accounts.Add(new Models.Account()
+            data.Accounts.Add(new Account()
             {
                 Title = title,
                 Url = url,
